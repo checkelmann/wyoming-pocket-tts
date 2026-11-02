@@ -1,3 +1,36 @@
+# Wyoming Pocket TTS for Home Assistant
+
+Personal maintenance fork of [araa47/wyoming_pocket_tts](https://github.com/araa47/wyoming_pocket_tts).
+
+[Add this repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fcheckelmann%2Fwyoming-pocket-tts)
+
+Install **Wyoming Pocket TTS (checkelmann)** from Settings → Apps → Install app.
+The repository URL is `https://github.com/checkelmann/wyoming-pocket-tts`.
+Prebuilt images support amd64 and aarch64; Home Assistant selects the appropriate image.
+
+For German, set `language: de` and `voices: [juergen]`, then start the app.
+First startup downloads the model. Add the discovered Wyoming integration in
+Settings → Devices & services, then select its TTS engine in your voice assistant.
+If discovery does not appear, add Wyoming Protocol manually with the hostname
+shown on this app's Info tab and port `10200`.
+Keep the original Pocket TTS app stopped while setting this one up. This fork has
+its own app data and configuration; it does not automatically migrate tokens or
+settings. Custom recordings in `/share/tts-voices` remain accessible.
+
+## Fixes in this fork
+
+- Retains `sympy`, `networkx`, and `torch._inductor`, required by current PyTorch.
+- Includes the fix from [upstream PR #41 by Gompman](https://github.com/araa47/wyoming_pocket_tts/pull/41).
+- Checks imports in both the builder and final runtime image, before publishing.
+- Pins Pocket TTS to 4.0.1 to keep builds on the tested API.
+- Removes deprecated `build.yaml`; Home Assistant pulls the published image.
+
+Built-in voices do not need a Hugging Face token. Cloning requires accepted model
+terms and your own token in the app's Configuration tab; never commit tokens or
+voice recordings to this public repository.
+
+## Upstream documentation
+
 <p align="center">
   <img src="logo.png" alt="Wyoming Pocket TTS" width="400">
 </p>
@@ -7,10 +40,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/araa47/wyoming_pocket_tts/actions/workflows/on-merge.yml"><img src="https://github.com/araa47/wyoming_pocket_tts/actions/workflows/on-merge.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/araa47/wyoming_pocket_tts/pkgs/container/wyoming_pocket_tts"><img src="https://img.shields.io/badge/ghcr.io-wyoming__pocket__tts-blue?logo=docker" alt="Docker"></a>
-  <a href="https://github.com/araa47/wyoming_pocket_tts/blob/main/LICENSE"><img src="https://img.shields.io/github/license/araa47/wyoming_pocket_tts" alt="License"></a>
-  <a href="https://github.com/araa47/wyoming_pocket_tts/releases"><img src="https://img.shields.io/github/v/release/araa47/wyoming_pocket_tts?include_prereleases&label=version" alt="Version"></a>
+  <a href="https://github.com/checkelmann/wyoming-pocket-tts/actions/workflows/on-merge.yml"><img src="https://github.com/checkelmann/wyoming-pocket-tts/actions/workflows/on-merge.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/checkelmann/wyoming-pocket-tts/pkgs/container/wyoming_pocket_tts"><img src="https://img.shields.io/badge/ghcr.io-wyoming__pocket__tts-blue?logo=docker" alt="Docker"></a>
+  <a href="https://github.com/checkelmann/wyoming-pocket-tts/blob/main/LICENSE"><img src="https://img.shields.io/github/license/araa47/wyoming_pocket_tts" alt="License"></a>
+  <a href="https://github.com/checkelmann/wyoming-pocket-tts/releases"><img src="https://img.shields.io/github/v/release/araa47/wyoming_pocket_tts?include_prereleases&label=version" alt="Version"></a>
 </p>
 
 <p align="center">
@@ -35,7 +68,7 @@
 1. Go to **Settings > Add-ons > Add-on Store**
 2. Click **...** > **Repositories** and add:
    ```
-   https://github.com/araa47/wyoming_pocket_tts
+   https://github.com/checkelmann/wyoming-pocket-tts
    ```
 3. Install **Wyoming Pocket TTS**
 4. In **Configuration**, choose a `language` and set `voices`
@@ -52,7 +85,7 @@ docker run -d \
   --name pocket-tts \
   -p 10200:10200 \
   -v pocket-tts-voices:/share/tts-voices \
-  ghcr.io/araa47/wyoming_pocket_tts:latest
+  ghcr.io/checkelmann/wyoming-pocket-tts:latest
 
 # For voice cloning, add your HuggingFace token:
 # -e HF_TOKEN=your_token_here
@@ -232,7 +265,7 @@ Each voice loads on first use (~2s). Add voice names to `preload_voices` (one pe
 
 ## Acknowledgements
 
-- [Easton Potokar (@contagon)](https://github.com/contagon) — GPU/CUDA support ([#36](https://github.com/araa47/wyoming_pocket_tts/pull/36)) and safetensors voice samples ([#35](https://github.com/araa47/wyoming_pocket_tts/pull/35))
+- [Easton Potokar (@contagon)](https://github.com/contagon) — GPU/CUDA support ([#36](https://github.com/checkelmann/wyoming-pocket-tts/pull/36)) and safetensors voice samples ([#35](https://github.com/checkelmann/wyoming-pocket-tts/pull/35))
 - [Kyutai](https://kyutai.org/) — the Pocket TTS model
 - The [Wyoming](https://github.com/rhasspy/wyoming) / [Home Assistant](https://www.home-assistant.io) ecosystem
 

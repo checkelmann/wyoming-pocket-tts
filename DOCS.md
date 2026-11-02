@@ -179,5 +179,5 @@ Home Assistant caches the voice list. After adding a new voice:
 
 ## Support
 
-- GitHub Issues: [github.com/araa47/wyoming_pocket_tts/issues](https://github.com/araa47/wyoming_pocket_tts/issues)
+- GitHub Issues: [github.com/araa47/wyoming_pocket_tts/issues](https://github.com/checkelmann/wyoming-pocket-tts/issues)
 - Pocket TTS Docs: [kyutai.org/tts](https://kyutai.org/tts)

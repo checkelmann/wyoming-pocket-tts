@@ -19,7 +19,7 @@ jobs:
         secrets: inherit
 
     docker:
-        needs: test
+        needs: [test, e2e]
         uses: ./.github/workflows/job-docker.yml
         permissions:
             contents: read

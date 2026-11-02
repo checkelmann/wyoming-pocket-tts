@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.9] - 2026-11-02
+
+### Fixed
+- Preserve PyTorch runtime dependencies; based on Gompman's upstream PR #41.
+- Check Pocket TTS and compiler imports in the final runtime image.
+- Support Pocket TTS 4 stream iterators without a close method.
+- Pin Pocket TTS 4.0.1 and refresh the development lockfile.
+- Publish this personal fork with its own Home Assistant repository and image.
+- Remove the deprecated build.yaml configuration.
+
 ## [1.4.8] - 2026-08-18
 
 ### Added

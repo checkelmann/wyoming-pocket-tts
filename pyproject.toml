@@ -1,6 +1,6 @@
 [project]
 name = "wyoming-pocket-tts"
-version = "1.4.8"
+version = "1.4.9"
 description = "Wyoming protocol server for Kyutai Pocket TTS with voice cloning"
 readme = "README.md"
 license = "MIT"
@@ -22,7 +22,8 @@ classifiers = [
 
 dependencies = [
     "wyoming>=1.5.0",
-    "pocket-tts>=0.2.0",
+    "pocket-tts==4.0.1",
+    "torch==2.12.0",
     "numpy>=1.24.0",
     # Not imported by this project directly, but pocket_tts.data.audio imports
     # it lazily to decode non-WAV custom voice samples (mp3/ogg/flac). Do not

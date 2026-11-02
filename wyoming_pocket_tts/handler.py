@@ -458,7 +458,9 @@ class PocketTTSEventHandler(AsyncEventHandler):
                                     "Generator step failed during cleanup: %s",
                                     pending.exception(),
                                 )
-                        await asyncio.shield(asyncio.to_thread(stream.close))
+                        close_stream = getattr(stream, "close", None)
+                        if callable(close_stream):
+                            await asyncio.shield(asyncio.to_thread(close_stream))
             except Exception as e:
                 _LOGGER.exception("Error generating audio: %s", e)
                 if audio_started:

@@ -383,3 +383,16 @@ def test_out_of_range_samples_are_clipped_not_wrapped():
     assert samples[0] == 32767  # clipped, not wrapped negative
     assert samples[1] == -32767  # clipped, not wrapped positive
     assert samples[2] == 16383  # in-range samples unaffected
+
+
+def test_stream_iterator_without_close_finishes_once(caplog):
+    """Pocket TTS 4 permits an Iterator, which need not implement close()."""
+
+    class IteratorModel(_FakeModel):
+        def generate_audio_stream(self, voice_state, text, **kwargs):
+            return iter([torch.full((4,), 0.5, dtype=torch.float32)])
+
+    handler = _RecordingHandler(IteratorModel())
+    assert _run(handler.handle_event(Synthesize(text="hello").event())) is True
+    assert sum(AudioStop.is_type(e.type) for e in handler.written) == 1
+    assert "Error generating audio" not in caplog.text
