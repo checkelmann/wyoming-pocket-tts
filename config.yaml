@@ -66,5 +66,5 @@ schema:
 panel_icon: mdi:text-to-speech
 panel_title: Pocket TTS
 
-# Prebuilt multi-architecture image; Supervisor selects the matching platform.
-image: ghcr.io/checkelmann/wyoming-pocket-tts
+# Build directly from this public repository in Home Assistant.
+# No build.yaml or registry credentials are required.

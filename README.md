@@ -6,7 +6,8 @@ Personal maintenance fork of [araa47/wyoming_pocket_tts](https://github.com/araa
 
 Install **Wyoming Pocket TTS (checkelmann)** from Settings → Apps → Install app.
 The repository URL is `https://github.com/checkelmann/wyoming-pocket-tts`.
-Prebuilt images support amd64 and aarch64; Home Assistant selects the appropriate image.
+Home Assistant builds the image from this public repository for amd64 or aarch64.
+Installation takes a few minutes and needs no container registry credentials.
 
 For German, set `language: de` and `voices: [juergen]`, then start the app.
 First startup downloads the model. Add the discovered Wyoming integration in
@@ -23,7 +24,8 @@ settings. Custom recordings in `/share/tts-voices` remain accessible.
 - Includes the fix from [upstream PR #41 by Gompman](https://github.com/araa47/wyoming_pocket_tts/pull/41).
 - Checks imports in both the builder and final runtime image, before publishing.
 - Pins Pocket TTS to 4.0.1 to keep builds on the tested API.
-- Removes deprecated `build.yaml`; Home Assistant pulls the published image.
+- Removes deprecated `build.yaml`; Home Assistant builds directly from the Dockerfile.
+- CI also builds and publishes container images; GHCR package visibility is managed separately.
 
 Built-in voices do not need a Hugging Face token. Cloning requires accepted model
 terms and your own token in the app's Configuration tab; never commit tokens or
